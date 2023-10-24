@@ -9,4 +9,8 @@ func SetRoutes( router *f.App ){
     router.Get( "/", func( c *f.Ctx ) error {
         return c.SendString( "Hello World!" )
     })
+
+    router.Use( func( c *f.Ctx ) error {
+        return c.SendStatus( 418 )
+    })
 }
