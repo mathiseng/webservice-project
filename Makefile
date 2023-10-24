@@ -24,7 +24,7 @@ default: clean install build run
 install:
 	mkdir -p $(GOTMPDIR)
 	cd $(SRC_DIR) \
-		&& go get -t
+		&& go get -t ./...
 
 .PHONY: run
 run:
