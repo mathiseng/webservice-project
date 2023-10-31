@@ -6,6 +6,7 @@ import (
     "os"
     "time"
     "math/rand"
+    "encoding/json"
     "testing"
     "net/http"
     ht "net/http/httptest"
@@ -17,7 +18,7 @@ import (
 )
 
 
-func setup() ( *f.App, *configuration.Config ){
+func setup() ( *f.App, *configuration.Config, *bool ){
     os.Setenv( "ENV_NAME", "testing" )
     config, _ := configuration.New()
 
@@ -26,9 +27,10 @@ func setup() ( *f.App, *configuration.Config ){
         DisableStartupMessage: false,
     })
 
-    SetRoutes( server, config )
+    var isHealthy = true
+    SetRoutes( server, config, &isHealthy )
 
-    return server, config
+    return server, config, &isHealthy
 }
 
 
@@ -43,6 +45,21 @@ func bodyToString( body *io.ReadCloser ) ( string, error ) {
 }
 
 
+func jsonToMap( body *io.ReadCloser ) ( map[string]interface{}, error ) {
+    defer ( *body ).Close()
+
+    var data map[string]interface{}
+    bodyBytes, err := io.ReadAll( *body )
+    if err != nil {
+        return data, err
+    }
+    if err := json.Unmarshal( bodyBytes, &data ); err != nil {
+       return data, err
+    }
+    return data, nil
+}
+
+
 func generateRandomNumberString() string {
     r := rand.New( rand.NewSource( time.Now().Unix() ) )
     randomNumber := r.Int63()
@@ -51,7 +68,7 @@ func generateRandomNumberString() string {
 
 
 func TestIndexRoute( t *testing.T ){
-    router, _ := setup()
+    router, _, _ := setup()
 
     req := ht.NewRequest( "GET", "/", nil )
     res, err := router.Test( req, -1 )
@@ -62,8 +79,31 @@ func TestIndexRoute( t *testing.T ){
 }
 
 
+func TestHealthRoute( t *testing.T ){
+    router, _, healthiness := setup()
+
+    req := ht.NewRequest( "GET", "/health", nil )
+    res, err := router.Test( req, -1 )
+    bodyContent, err := jsonToMap( &res.Body )
+    status := bodyContent[ "status" ].( string )
+    assert.Equal( t, http.StatusOK, res.StatusCode )
+    assert.Nil( t, err )
+    assert.Equal( t, "passed", status )
+
+    *healthiness = false
+
+    req = ht.NewRequest( "GET", "/health", nil )
+    res, err = router.Test( req, -1 )
+    bodyContent, err = jsonToMap( &res.Body )
+    status = bodyContent[ "status" ].( string )
+    assert.Equal( t, http.StatusServiceUnavailable, res.StatusCode )
+    assert.Nil( t, err )
+    assert.Equal( t, "failed", status )
+}
+
+
 func TestEnvRoute( t *testing.T ){
-    router, config := setup()
+    router, config, _ := setup()
 
     envVarName := "TEST_ENV_VAR"
     envVarValue := generateRandomNumberString()

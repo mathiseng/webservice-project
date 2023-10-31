@@ -1,6 +1,7 @@
 package routing
 
 import (
+    "encoding/json"
     "os"
     "fmt"
     "net/http"
@@ -11,11 +12,36 @@ import (
 )
 
 
-func SetRoutes( router *f.App, config *configuration.Config ){
+func SetRoutes( router *f.App, config *configuration.Config, healthiness *bool ){
 
     router.Get( "/", func( c *f.Ctx ) error {
         return c.SendString( "Hello, World!" )
     })
+
+
+    router.Get( "/health", func( c *f.Ctx ) error {
+        type response struct {
+            Status  string  `json:"status"  validate:"oneof=passed failed"`
+        }
+
+        c.Type( "json", "utf-8" )
+
+        var res response
+        if *healthiness == false {
+            res = response{
+                Status: "failed",
+            }
+            c.Status( http.StatusServiceUnavailable )
+        } else {
+            res = response{
+                Status: "passed",
+            }
+            c.Status( http.StatusOK )
+        }
+
+        return c.JSON( res )
+    })
+
 
     router.Get( "/env", func( c *f.Ctx ) error {
         c.Type( "txt", "utf-8" )

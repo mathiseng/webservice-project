@@ -16,9 +16,6 @@ import (
 )
 
 
-var isHealthy = false
-
-
 func main() {
     config, err := configuration.New()
     if err != nil {
@@ -30,7 +27,9 @@ func main() {
         DisableStartupMessage: config.Environment != "development",
     })
 
-    routing.SetRoutes( server )
+    var isHealthy = false
+
+    routing.SetRoutes( server, config, &isHealthy )
 
     go func(){
         err := server.Listen( fmt.Sprintf( "%s:%d", config.Host, config.Port ) )
