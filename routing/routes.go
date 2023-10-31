@@ -21,25 +21,29 @@ func SetRoutes( router *f.App, config *configuration.Config, healthiness *bool )
 
     router.Get( "/health", func( c *f.Ctx ) error {
         type response struct {
-            Status  string  `json:"status"  validate:"oneof=passed failed"`
+            Status  string  `json:"status"  validate:"oneof=pass fail"`
         }
 
-        c.Type( "json", "utf-8" )
+        c.Set( "Content-Type", "application/health+json; charset=utf-8" )
 
-        var res response
+        var res *response
         if *healthiness == false {
-            res = response{
-                Status: "failed",
+            res = &response{
+                Status: "fail",
             }
             c.Status( http.StatusServiceUnavailable )
         } else {
-            res = response{
-                Status: "passed",
+            res = &response{
+                Status: "pass",
             }
             c.Status( http.StatusOK )
         }
 
-        return c.JSON( res )
+        resJson, err := json.Marshal( res )
+        if err != nil {
+            return err
+        }
+        return c.SendString( string( resJson ) )
     })
 
 

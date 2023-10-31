@@ -88,7 +88,7 @@ func TestHealthRoute( t *testing.T ){
     status := bodyContent[ "status" ].( string )
     assert.Equal( t, http.StatusOK, res.StatusCode )
     assert.Nil( t, err )
-    assert.Equal( t, "passed", status )
+    assert.Equal( t, "pass", status )
 
     *healthiness = false
 
@@ -98,7 +98,7 @@ func TestHealthRoute( t *testing.T ){
     status = bodyContent[ "status" ].( string )
     assert.Equal( t, http.StatusServiceUnavailable, res.StatusCode )
     assert.Nil( t, err )
-    assert.Equal( t, "failed", status )
+    assert.Equal( t, "fail", status )
 }
 
 
