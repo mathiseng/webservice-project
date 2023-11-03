@@ -4,7 +4,11 @@ import (
     "encoding/json"
     "os"
     "fmt"
+    "strings"
     "net/http"
+    "html/template"
+    "log"
+    "bytes"
 
     "webservice/configuration"
 
@@ -14,8 +18,32 @@ import (
 
 func SetRoutes( router *f.App, config *configuration.Config, healthiness *bool ){
 
+    indexHtmlTemplate, err := template.New( "index" ).Parse( indexHtml )
+    if err != nil {
+        log.Fatal( err )
+    }
+
+
     router.Get( "/", func( c *f.Ctx ) error {
-        return c.SendString( "Hello, World!" )
+        headers := c.GetReqHeaders()
+        if ! strings.Contains( headers[ "Accept" ], "html" ) {
+            c.Set( "Content-Type", "text/plain; charset=utf-8" )
+            return c.SendString( "Hello, World!" )
+        }
+
+        data := indexHtmlData{
+            Version: "",
+            Color: "",
+        }
+
+        buffer := &bytes.Buffer{}
+        err := indexHtmlTemplate.Execute( buffer, data )
+        if err != nil {
+            return err
+        }
+
+        c.Set( "Content-Type", "text/html; charset=utf-8" )
+        return c.Send( buffer.Bytes() )
     })
 
 

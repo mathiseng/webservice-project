@@ -71,9 +71,16 @@ func TestIndexRoute( t *testing.T ){
     router, _, _ := setup()
 
     req := ht.NewRequest( "GET", "/", nil )
-    res, err := router.Test( req, -1 )
-
+    req.Header.Add( "Accept", "text/html" )
+    res, _ := router.Test( req, -1 )
     bodyContent, err := bodyToString( &res.Body )
+    assert.Nil( t, err )
+    assert.Contains( t, bodyContent, "</html>" )
+    assert.Contains( t, bodyContent, "<head>" )
+
+    req = ht.NewRequest( "GET", "/", nil )
+    res, _ = router.Test( req, -1 )
+    bodyContent, err = bodyToString( &res.Body )
     assert.Nil( t, err )
     assert.Equal( t, "Hello, World!", bodyContent )
 }
