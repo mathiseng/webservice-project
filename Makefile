@@ -14,7 +14,7 @@ export PATH := $(BIN_DIR):$(PATH)
 
 export GOMODCACHE = $(LOCAL_DIR)/cache/go
 export GOTMPDIR = $(TMP_DIR)/go
-
+export GOBIN = $(BIN_DIR)
 
 
 default: clean install build run
@@ -38,6 +38,11 @@ $(BIN_DIR)/artifact.bin:
 	&& go build \
 		-o $(@) \
 		$(SRC_DIR)/*.go
+
+.PHONY: build-linux
+build-linux: export GOOS := linux
+build-linux: export GOARCH := amd64
+build-linux: $(BIN_DIR)/artifact.bin
 
 
 .PHONY: test
