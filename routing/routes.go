@@ -25,6 +25,18 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         log.Fatal( err )
     }
 
+    if config.LogLevel == "debug" {
+        router.All( "*", func( c *f.Ctx ) error {
+            log.Printf( "%s  %s  mime:%s  agent:%s",
+                c.Path(),
+                c.Method(),
+                c.Get( f.HeaderContentType ),
+                c.Get( f.HeaderUserAgent ),
+            )
+            return c.Next()
+        })
+    }
+
 
     router.Get( "/", func( c *f.Ctx ) error {
         headers := c.GetReqHeaders()
