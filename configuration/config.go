@@ -12,6 +12,8 @@ const BODY_SIZE_LIMIT = 32 * 1024 * 1024    // 32 MB, in bytes
 
 
 type Config struct {
+    Version     string `env:"VERSION"   envDefault:"N/A"`
+
     Environment string `env:"ENV_NAME" envDefault:"development"`
     Host        string `env:"HOST" envDefault:"127.0.0.1"`
     Port        int16  `env:"PORT" envDefault:"3000"`

@@ -34,7 +34,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         }
 
         data := indexHtmlData{
-            Version: "",
+            Version: config.Version,
             Color: "",
         }
 
