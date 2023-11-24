@@ -28,7 +28,12 @@ func main() {
         DisableStartupMessage: config.Environment != "development",
     })
 
-    store := state.NewEphemeralStore()
+    var store state.Store
+    if len( config.DatabaseHost ) <= 0 {
+        store = state.NewEphemeralStore()
+    } else {
+        store = state.NewPersistentStore( config )
+    }
 
     var isHealthy = false
 
