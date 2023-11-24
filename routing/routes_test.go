@@ -115,7 +115,7 @@ func TestHealthRoute( t *testing.T ){
     router, _, _, healthiness := setup()
 
     req := ht.NewRequest( "GET", "/health", nil )
-    res, err := router.Test( req, -1 )
+    res, _ := router.Test( req, -1 )
     bodyContent, err := jsonToMap( &res.Body )
     status := bodyContent[ "status" ].( string )
     assert.Equal( t, http.StatusOK, res.StatusCode )
@@ -125,7 +125,7 @@ func TestHealthRoute( t *testing.T ){
     *healthiness = false
 
     req = ht.NewRequest( "GET", "/health", nil )
-    res, err = router.Test( req, -1 )
+    res, _ = router.Test( req, -1 )
     bodyContent, err = jsonToMap( &res.Body )
     status = bodyContent[ "status" ].( string )
     assert.Equal( t, http.StatusServiceUnavailable, res.StatusCode )
@@ -143,7 +143,7 @@ func TestEnvRoute( t *testing.T ){
     os.Setenv( envVarName, envVarValue )
 
     req := ht.NewRequest( "GET", "/env", nil )
-    res, err := router.Test( req, -1 )
+    res, _ := router.Test( req, -1 )
     bodyContent, err := bodyToString( &res.Body )
     assert.Equal( t, http.StatusOK, res.StatusCode )
     assert.Nil( t, err )
@@ -152,7 +152,7 @@ func TestEnvRoute( t *testing.T ){
     ( *config ).Environment = "production"
 
     req = ht.NewRequest( "GET", "/env", nil )
-    res, err = router.Test( req, -1 )
+    res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusForbidden, res.StatusCode )
 }
 
