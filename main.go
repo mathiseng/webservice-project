@@ -26,6 +26,7 @@ func main() {
     server := fiber.New( fiber.Config{
         AppName: "webservice",
         DisableStartupMessage: config.Environment != "development",
+        BodyLimit: configuration.BODY_SIZE_LIMIT,
     })
 
     var store state.Store

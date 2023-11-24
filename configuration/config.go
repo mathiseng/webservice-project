@@ -8,6 +8,9 @@ import (
 )
 
 
+const BODY_SIZE_LIMIT = 32 * 1024 * 1024    // 32 MB, in bytes
+
+
 type Config struct {
     Environment string `env:"ENV_NAME" envDefault:"development"`
     Host        string `env:"HOST" envDefault:"127.0.0.1"`

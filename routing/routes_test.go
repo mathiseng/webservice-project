@@ -28,6 +28,7 @@ func setup() ( *f.App, *configuration.Config, state.Store, *bool ){
     server := f.New( f.Config{
         AppName: "test",
         DisableStartupMessage: false,
+        BodyLimit: configuration.BODY_SIZE_LIMIT,
     })
     store := state.NewEphemeralStore()
     var isHealthy = true
