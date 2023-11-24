@@ -11,6 +11,7 @@ import (
 
     "webservice/configuration"
     "webservice/routing"
+    "webservice/state"
 
     "github.com/gofiber/fiber/v2"
 )
@@ -27,9 +28,11 @@ func main() {
         DisableStartupMessage: config.Environment != "development",
     })
 
+    store := state.NewEphemeralStore()
+
     var isHealthy = false
 
-    routing.SetRoutes( server, config, &isHealthy )
+    routing.SetRoutes( server, config, store, &isHealthy )
 
     go func(){
         err := server.Listen( fmt.Sprintf( "%s:%d", config.Host, config.Port ) )
@@ -64,6 +67,10 @@ func main() {
             err := server.ShutdownWithContext( shuttingDown )
             if err != nil {
                 log.Printf( "HTTP server failed to shut down: %v", err )
+            }
+            err = store.Disconnect()
+            if err != nil {
+                log.Printf( "Store failed to disconnect: %v", err )
             }
             concludeShutdown()
 
