@@ -8,9 +8,16 @@ or even used the project work.
 #### Prerequisites:
 
 * Go toolchain (install via system package manager or [by hand](https://go.dev/doc/install))
+* [optional] [Redis](https://redis.io/docs/install/) to persist state
 
 
-#### Build
+#### State:
+
+If the database host is not explicitly defined, then the state is ephemeral. For more
+information checkout the [configuration code](./configuration/config.go).
+
+
+#### Build:
 
 1. Install dependencies: `go get -t ./...`
 2. Run locally: `go run .`
