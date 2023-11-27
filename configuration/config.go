@@ -3,6 +3,8 @@ package configuration
 import (
     "errors"
     "fmt"
+    "os"
+    fp "path/filepath"
 
     configParser "github.com/caarlos0/env/v9"
 )
@@ -57,6 +59,26 @@ func New() ( *Config, error ){
         return nil, errors.New(
             fmt.Sprintf( "Invalid log level: %s", cfg.LogLevel ),
         )
+    }
+
+
+    if len( cfg.DatabaseHost ) >= 1 && len( cfg.DatabasePassword ) >= 2 {
+        if ! fp.IsLocal( cfg.DatabasePassword ) && ! fp.IsAbs( cfg.DatabasePassword ) {
+            return nil, errors.New(
+                fmt.Sprintln( "Database password must be a file path" ),
+            )
+        }
+        _, err := os.Stat( cfg.DatabasePassword )
+        if err != nil {
+            if errors.Is( err, os.ErrNotExist ){
+                return nil, errors.New(
+                    fmt.Sprintln( "Database password file does not exist" ),
+                )
+            }
+            return nil, errors.New(
+                fmt.Sprintln( "Database password file not accessible" ),
+            )
+        }
     }
 
 
