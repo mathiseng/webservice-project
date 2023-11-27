@@ -38,7 +38,10 @@ func main() {
 
     var isHealthy = false
 
-    routing.SetRoutes( server, config, store, &isHealthy )
+    err = routing.SetRoutes( server, config, store, &isHealthy )
+    if err != nil {
+        log.Fatalf( "HTTP server failed to start: %v", err )
+    }
 
     go func(){
         err := server.Listen( fmt.Sprintf( "%s:%d", config.Host, config.Port ) )

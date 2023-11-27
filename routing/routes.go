@@ -18,11 +18,11 @@ import (
 )
 
 
-func SetRoutes( router *f.App, config *configuration.Config, store state.Store, healthiness *bool ) {
+func SetRoutes( router *f.App, config *configuration.Config, store state.Store, healthiness *bool ) error {
 
     indexHtmlTemplate, err := template.New( "index" ).Parse( indexHtml )
     if err != nil {
-        log.Fatal( err )
+        return err
     }
 
     if config.LogLevel == "debug" {
@@ -237,4 +237,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
     router.Use( func( c *f.Ctx ) error {
         return c.SendStatus( http.StatusTeapot )
     })
+
+
+    return nil
 }

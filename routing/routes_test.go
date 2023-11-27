@@ -32,7 +32,7 @@ func setup() ( *f.App, *configuration.Config, state.Store, *bool ){
     })
     store := state.NewEphemeralStore()
     var isHealthy = true
-    SetRoutes( server, config, store, &isHealthy )
+    _ = SetRoutes( server, config, store, &isHealthy )
 
     return server, config, store, &isHealthy
 }
