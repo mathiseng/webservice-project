@@ -8,8 +8,8 @@ type Item struct {
 }
 
 
-func NewItem( name string, mimeType string, data []byte ) *Item {
-    return &Item{
+func NewItem( name string, mimeType string, data []byte ) Item {
+    return Item{
         name: name,
         mimeType: mimeType,
         data: data,

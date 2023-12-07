@@ -20,7 +20,7 @@ func NewEphemeralStore() *Ephemeral {
 }
 
 
-func ( e *Ephemeral ) Add( i *Item ) error {
+func ( e *Ephemeral ) Add( i Item ) error {
     if e.store == nil {
         return errors.New( "ephemeral storage not available" )
     }
@@ -60,7 +60,7 @@ func ( e *Ephemeral ) Fetch( name string ) ( *Item, error ) {
     if !found {
         return nil, nil
     }
-    return item, nil
+    return &item, nil
 }
 
 

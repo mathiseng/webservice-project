@@ -44,7 +44,7 @@ func NewPersistentStore( c *configuration.Config ) *Persistent {
 }
 
 
-func ( e *Persistent ) Add( i *Item ) error {
+func ( e *Persistent ) Add( i Item ) error {
     ctx, cancel := context.WithTimeout( context.TODO(), e.timeout )
     defer cancel()
 
@@ -82,7 +82,8 @@ func ( e *Persistent ) Fetch( name string ) ( *Item, error ) {
 
     var item *Item = nil
     if len( value ) >= 1 {
-        item = NewItem( name, value[ "mime" ], []byte( value[ "data" ] ) )
+        i := NewItem( name, value[ "mime" ], []byte( value[ "data" ] ) )
+        item = &i
     }
     return item, nil
 }
