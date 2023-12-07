@@ -64,15 +64,15 @@ func ( e *Ephemeral ) Fetch( name string ) ( *Item, error ) {
 }
 
 
-func ( e *Ephemeral ) Show() ( []string, error ) {
+func ( e *Ephemeral ) List() ( []string, error ) {
     if e.store == nil {
         return nil, errors.New( "ephemeral storage not available" )
     }
 
     e.mux.Lock()
     names := make( []string, 0, len( e.store ) )
-    for k := range e.store {
-        names = append( names, k )
+    for _, item := range e.store {
+        names = append( names, item.Name() )
     }
     e.mux.Unlock()
 

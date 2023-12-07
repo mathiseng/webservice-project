@@ -205,15 +205,15 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
 
 
     router.Get( "/states", func( c *f.Ctx ) error {
-        states, err := store.Show()
+        names, err := store.List()
         if err != nil {
             return c.SendStatus( http.StatusInternalServerError )
         }
 
         const pathPrefix string = "/state"
-        paths := make ( []string, len( states ) )
-        for i, state := range states {
-            paths[ i ] = fmt.Sprintf( "%s/%s", pathPrefix, state )
+        paths := make( []string, len( names ) )
+        for i, name := range names {
+            paths[ i ] = fmt.Sprintf( "%s/%s", pathPrefix, name )
         }
 
         headers := c.GetReqHeaders()

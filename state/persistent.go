@@ -51,8 +51,8 @@ func ( e *Persistent ) Add( i Item ) error {
     name := i.Name()
     if err := e.client.HSet(
         ctx, name,
-        "data", i.Data(),
         "mime", i.MimeType(),
+        "data", i.Data(),
     ).Err(); err != nil {
         return err
     }
@@ -89,7 +89,7 @@ func ( e *Persistent ) Fetch( name string ) ( *Item, error ) {
 }
 
 
-func ( e *Persistent ) Show() ( []string, error ) {
+func ( e *Persistent ) List() ( []string, error ) {
     ctx, cancel := context.WithTimeout( context.TODO(), e.timeout )
     defer cancel()
 
