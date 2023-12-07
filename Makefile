@@ -50,6 +50,7 @@ build-linux: $(BIN_DIR)/artifact.bin
 .SILENT: test
 test:
 	cd $(SRC_DIR) \
+	&& go clean -testcache \
 	&& go test \
 		-race \
 		-v \
