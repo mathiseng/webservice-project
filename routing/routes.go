@@ -27,9 +27,9 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
 
     if config.LogLevel == "debug" {
         router.All( "*", func( c *f.Ctx ) error {
-            log.Printf( "%s  %s  mime:%s  agent:%s",
-                c.Path(),
+            log.Printf( "%s %s  mime:%s  agent:%s",
                 c.Method(),
+                c.Path(),
                 c.Get( f.HeaderContentType ),
                 c.Get( f.HeaderUserAgent ),
             )
