@@ -40,7 +40,8 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
 
     router.Get( "/", func( c *f.Ctx ) error {
         headers := c.GetReqHeaders()
-        if ! strings.Contains( headers[ "Accept" ], "html" ) {
+        acceptHeader := strings.Join( headers[ "Accept" ], " " )
+        if ! strings.Contains( acceptHeader , "html" ) {
             c.Set( "Content-Type", "text/plain; charset=utf-8" )
             return c.SendString( "Hello, World!" )
         }
@@ -216,8 +217,9 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         }
 
         headers := c.GetReqHeaders()
+        acceptHeader := strings.Join( headers[ "Accept" ], " " )
         var response string
-        if strings.Contains( headers[ "Accept" ], "json" ) {
+        if strings.Contains( acceptHeader, "json" ) {
             c.Set( "Content-Type", "application/json; charset=utf-8" )
             resJson, err := json.Marshal( paths )
             if err != nil {
