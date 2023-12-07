@@ -130,7 +130,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
 
 
     statePathGroup.Put( "/:name", func( c *f.Ctx ) error {
-        contentType := c.Get( "Content-Type" )
+        contentType := strings.Clone( c.Get( "Content-Type" ) )
         _, _, err := mime.ParseMediaType( contentType )
         if err != nil {
             c.Status( http.StatusBadRequest )
@@ -139,7 +139,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
             )
         }
 
-        name := c.Params( "name" )
+        name := strings.Clone( c.Params( "name" ) )
         existingItem, err := store.Fetch( name )
         if err != nil {
             c.Status( http.StatusInternalServerError )
@@ -175,7 +175,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
 
 
     statePathGroup.Delete( "/:name", func( c *f.Ctx ) error {
-        name := c.Params( "name" )
+        name := strings.Clone( c.Params( "name" ) )
         existingItem, err := store.Fetch( name )
         if err != nil {
             return c.SendStatus( http.StatusInternalServerError )
