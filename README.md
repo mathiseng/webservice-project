@@ -47,7 +47,7 @@ curl http://localhost:8080
 
 HTML:
 ```bash
-curl --header 'Content-Type: text/html; charset=utf-8' http://localhost:8080
+curl --header 'Accept: text/html; charset=utf-8' http://localhost:8080
 # or just open in a browser
 ```
 
