@@ -171,31 +171,31 @@ func TestState( t *testing.T ){
     statePath2Body := generateRandomBytes( statePath2BodySize )
 
     req := ht.NewRequest( "GET", statePath1, nil )
-    res, _ := router.Test( req, 1 )
+    res, _ := router.Test( req, -1 )
     assert.Equal( t, http.StatusNotFound, res.StatusCode )
 
     req = ht.NewRequest( "PUT", statePath1, nil )
     req.Header.Add( "Content-Type", "not a MIME type" )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusBadRequest, res.StatusCode )
 
     req = ht.NewRequest( "PUT", statePath1, strings.NewReader( statePath1Body1 ) )
     req.Header.Add( "Content-Type", statePath1Mime )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusCreated, res.StatusCode )
 
     req = ht.NewRequest( "PUT", statePath1, strings.NewReader( statePath1Body1 ) )
     req.Header.Add( "Content-Type", statePath1Mime )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusOK, res.StatusCode )
 
     req = ht.NewRequest( "PUT", statePath1, strings.NewReader( statePath1Body2 ) )
     req.Header.Add( "Content-Type", statePath1Mime )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusNoContent, res.StatusCode )
 
     req = ht.NewRequest( "GET", statePath1, nil )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     bodyContent, err := bodyToString( &res.Body )
     assert.Nil( t, err )
     assert.Equal( t, http.StatusOK, res.StatusCode )
@@ -203,16 +203,16 @@ func TestState( t *testing.T ){
     assert.Equal( t, statePath1Body2, bodyContent )
 
     req = ht.NewRequest( "DELETE", statePath2, nil )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusNotFound, res.StatusCode )
 
     req = ht.NewRequest( "PUT", statePath2, bytes.NewReader( statePath2Body ) )
     req.Header.Add( "Content-Type", statePath2Mime )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusCreated, res.StatusCode )
 
     req = ht.NewRequest( "GET", statePath2, nil )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     bodyBytes, err := io.ReadAll( res.Body )
     assert.Equal( t, http.StatusOK, res.StatusCode )
     assert.Equal( t, statePath2Mime, res.Header[ "Content-Type" ][0] )
@@ -220,7 +220,7 @@ func TestState( t *testing.T ){
 
     req = ht.NewRequest( "GET", "/states", nil )
     req.Header.Add( "Accept", "application/json" )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     states, err := jsonToStringSlice( &res.Body )
     assert.Nil( t, err )
     assert.Len( t, states, 2 )
@@ -228,11 +228,11 @@ func TestState( t *testing.T ){
     assert.Contains( t, states, statePath2 )
 
     req = ht.NewRequest( "DELETE", statePath1, nil )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusNoContent, res.StatusCode )
 
     req = ht.NewRequest( "GET", "/states", nil )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     statesPlain, err := bodyToString( &res.Body )
     assert.Nil( t, err )
     assert.NotContains( t, statesPlain, statePath1 )
@@ -240,7 +240,7 @@ func TestState( t *testing.T ){
 
     err = store.Disconnect()
     req = ht.NewRequest( "GET", statePath2, nil )
-    res, _ = router.Test( req, 1 )
+    res, _ = router.Test( req, -1 )
     assert.Nil( t, err )
     assert.Equal( t, http.StatusInternalServerError, res.StatusCode )
 }
