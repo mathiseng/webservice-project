@@ -24,9 +24,11 @@ information checkout the [configuration code](./configuration/config.go).
 3. Execute unit tests: `go test -race -v ./...`
 4. Build artifact: `go build -o ./artifact.bin ./*.go`
 
-To build for another platform, set `GOOS` and `GOARCH`. To yield a static binary (fully
-self-contained, no dynamic linking) set `CGO_ENABLED=0`. For more details, please refer
-to the [Makefile](./Makefile).
+To build for another platform, set `GOOS` and `GOARCH`. To yield a static
+binary (fully self-contained, no dynamic linking) set `CGO_ENABLED=0`. 
+To set a version during build time, add the following CLI option
+`-ldflags "-X webservice/configuration.version=${VERSION}"`.
+For more information, please refer to the [Makefile](./Makefile).
 
 
 #### Run:

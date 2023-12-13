@@ -37,6 +37,7 @@ $(BIN_DIR)/artifact.bin:
 	cd $(SRC_DIR) \
 	&& go build \
 		-o $(@) \
+		-ldflags "-X webservice/configuration.version=0.0.1" \
 		$(SRC_DIR)/*.go
 
 .PHONY: build-linux

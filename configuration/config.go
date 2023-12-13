@@ -12,9 +12,11 @@ import (
 
 const BODY_SIZE_LIMIT = 32 * 1024 * 1024    // 32 MB, in bytes
 
+var version string = "n/a"
+
 
 type Config struct {
-    Version     string `env:"VERSION"   envDefault:"N/A"`
+    Version     string
 
     LogLevel    string `env:"LOG_LEVE"  envDefault:"error"`
 
@@ -31,7 +33,9 @@ type Config struct {
 
 
 func New() ( *Config, error ){
-    cfg := Config{}
+    cfg := Config{
+        Version: version,
+    }
 
     if err := configParser.Parse( &cfg ); err != nil {
         return nil, err
