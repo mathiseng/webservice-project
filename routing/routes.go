@@ -48,7 +48,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
 
         data := indexHtmlData{
             Version: config.Version,
-            Color: "",
+            Color: config.FontColor,
         }
 
         buffer := &bytes.Buffer{}

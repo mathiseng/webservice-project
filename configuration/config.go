@@ -4,6 +4,7 @@ import (
     "errors"
     "fmt"
     "os"
+    "unicode"
     fp "path/filepath"
 
     configParser "github.com/caarlos0/env/v9"
@@ -17,6 +18,8 @@ var version string = "n/a"
 
 type Config struct {
     Version     string
+
+    FontColor   string `env:"FONT_COLOR"  envDefault:""`
 
     LogLevel    string `env:"LOG_LEVE"  envDefault:"error"`
 
@@ -65,7 +68,6 @@ func New() ( *Config, error ){
         )
     }
 
-
     if len( cfg.DatabaseHost ) >= 1 && len( cfg.DatabasePassword ) >= 2 {
         if ! fp.IsLocal( cfg.DatabasePassword ) && ! fp.IsAbs( cfg.DatabasePassword ) {
             return nil, errors.New(
@@ -82,6 +84,22 @@ func New() ( *Config, error ){
             return nil, errors.New(
                 fmt.Sprintln( "Database password file not accessible" ),
             )
+        }
+    }
+
+    if len( cfg.FontColor ) >= 1 {
+        if len( cfg.FontColor ) >= 21 {
+            return nil, errors.New(
+                fmt.Sprintln( "Font color too long" ),
+            )
+        }
+
+        for _, r := range cfg.FontColor {
+            if ! unicode.IsLetter( r ) {
+                return nil, errors.New(
+                    fmt.Sprintln( "Invalid character in font color" ),
+                )
+            }
         }
     }
 
