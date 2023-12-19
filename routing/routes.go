@@ -35,7 +35,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
             log.Printf( "%s %s  mime:%s  agent:%s",
                 c.Method(),
                 c.Path(),
-                c.Get( f.HeaderContentType ),
+                c.Get( f.HeaderContentType, c.Get( f.HeaderAccept, "" ) ),
                 c.Get( f.HeaderUserAgent ),
             )
             return c.Next()
