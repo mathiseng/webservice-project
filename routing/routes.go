@@ -114,6 +114,22 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
     statePathGroup := router.Group( "/state" )
 
 
+    statePathGroup.Options( "/:name", func( c *f.Ctx ) error {
+        name := strings.Clone( c.Params( "name" ) )
+        existingItem, err := store.Fetch( name )
+        if err != nil {
+            return c.SendStatus( http.StatusInternalServerError )
+        }
+
+        if existingItem == nil {
+            return c.SendStatus( http.StatusNotFound )
+        }
+
+        c.Set( "Allow", "OPTIONS, GET, PUT, DELETE, HEAD" )
+        return c.SendStatus( http.StatusNoContent )
+    })
+
+
     statePathGroup.Get( "/:name", func( c *f.Ctx ) error {
         existingItem, err := store.Fetch( c.Params( "name" ) )
         if err != nil {
@@ -212,11 +228,6 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
 
 
     statePathGroup.Use( "*", func( c *f.Ctx ) error {
-        if method := c.Method(); method == "OPTIONS" {
-            c.Set( "Allow", "GET, PUT, DELETE, OPTIONS" )
-            return c.SendStatus( http.StatusNoContent )
-        }
-
         return c.SendStatus( http.StatusNotFound )
     })
 
