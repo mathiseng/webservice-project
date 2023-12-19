@@ -25,6 +25,11 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         return err
     }
 
+    metricsTextTemplate, err := template.New( "metrics" ).Parse( metricsText )
+    if err != nil {
+        return err
+    }
+
     if config.LogLevel == "debug" {
         router.All( "*", func( c *f.Ctx ) error {
             log.Printf( "%s %s  mime:%s  agent:%s",
@@ -87,6 +92,35 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
             return err
         }
         return c.SendString( string( resJson ) )
+    })
+
+
+    router.Get( "/metrics", func( c *f.Ctx ) error {
+        headers := c.GetReqHeaders()
+        acceptHeader := strings.Join( headers[ "Accept" ], " " )
+        buffer := &bytes.Buffer{}
+
+        if strings.Contains( acceptHeader , "json" ) {
+            // FUTUREWORK: implement https://opentelemetry.io/docs/specs/otlp/#otlphttp
+            return c.SendStatus( http.StatusNotAcceptable )
+        } else {
+            names, err := store.List()
+            if err != nil {
+                return c.SendStatus( http.StatusInternalServerError )
+            }
+
+            data := metricsTextData{
+                Count: len( names ),
+            }
+
+            err = metricsTextTemplate.Execute( buffer, data )
+            if err != nil {
+                return err
+            }
+
+            c.Set( "Content-Type", "text/plain; charset=utf-8" )
+            return c.Send( buffer.Bytes() )
+        }
     })
 
 
