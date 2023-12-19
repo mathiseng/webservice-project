@@ -45,6 +45,7 @@ build-linux: export GOOS := linux
 build-linux: export GOARCH := amd64
 build-linux: export CGO_ENABLED := 0
 build-linux: $(BIN_DIR)/artifact.bin
+	sha256sum $(BIN_DIR)/artifact.bin
 
 
 .PHONY: test
