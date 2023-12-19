@@ -5,6 +5,7 @@ import (
     "fmt"
     "io"
     "os"
+    "strconv"
     "strings"
     "time"
     "math/rand"
@@ -167,7 +168,7 @@ func TestState( t *testing.T ){
 
     const statePath2 = "/state/another-test"
     const statePath2Mime = "application/octet-stream"
-    const statePath2BodySize = 64
+    const statePath2BodySize = 128
     statePath2Body := generateRandomBytes( statePath2BodySize )
 
     req := ht.NewRequest( "GET", statePath1, nil )
@@ -210,6 +211,15 @@ func TestState( t *testing.T ){
     req.Header.Add( "Content-Type", statePath2Mime )
     res, _ = router.Test( req, -1 )
     assert.Equal( t, http.StatusCreated, res.StatusCode )
+
+    req = ht.NewRequest( "HEAD", statePath2, nil )
+    res, _ = router.Test( req, -1 )
+    contentLength, err := strconv.ParseInt( res.Header[ "Content-Length" ][0], 10, 64 )
+    assert.Nil( t, err )
+    assert.Equal( t, http.StatusOK, res.StatusCode )
+    assert.Equal( t, statePath2Mime, res.Header[ "Content-Type" ][0] )
+    assert.Equal( t, int64( statePath2BodySize ), contentLength )
+    assert.IsType( t, res.Body, http.NoBody )
 
     req = ht.NewRequest( "GET", statePath2, nil )
     res, _ = router.Test( req, -1 )

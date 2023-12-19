@@ -86,6 +86,13 @@ curl \
   http://localhost:8080/state/bar
 ```
 
+Find out MIME type and size of an entry:
+```bash
+curl \
+  -X HEAD \
+  http://localhost:8080/state/bar
+```
+
 Obtain an entry:
 ```bash
 curl \

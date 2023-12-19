@@ -194,6 +194,23 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
     })
 
 
+    statePathGroup.Head( "/:name", func( c *f.Ctx ) error {
+        name := strings.Clone( c.Params( "name" ) )
+        existingItem, err := store.Fetch( name )
+        if err != nil {
+            return c.SendStatus( http.StatusInternalServerError )
+        }
+
+        if existingItem == nil {
+            return c.SendStatus( http.StatusNotFound )
+        }
+
+        c.Set( "Content-Type", existingItem.MimeType() )
+        c.Set( "Content-Length", fmt.Sprintf( "%d", len( existingItem.Data() ) ) )
+        return c.SendStatus( http.StatusOK )
+    })
+
+
     statePathGroup.Use( "*", func( c *f.Ctx ) error {
         if method := c.Method(); method == "OPTIONS" {
             c.Set( "Allow", "GET, PUT, DELETE, OPTIONS" )
