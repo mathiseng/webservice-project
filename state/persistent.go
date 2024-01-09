@@ -5,6 +5,8 @@ import (
     "runtime"
     "context"
     "time"
+    "os"
+    log "log/slog"
 
     "webservice/configuration"
 
@@ -21,11 +23,18 @@ type Persistent struct {
 
 
 func NewPersistentStore( c *configuration.Config ) *Persistent {
+    content, err := os.ReadFile( c.DatabasePassword )
+    if err != nil {
+        log.Error( fmt.Sprintf( "Database password not able to be read: %v", err ) )
+        os.Exit( 1 )
+    }
+    dbPassword := string( content )
+
     return &Persistent{
         client: db.NewClient( &db.Options{
             Addr: fmt.Sprintf( "%s:%d", c.DatabaseHost, c.DatabasePort ),
             Username: c.DatabaseUsername,
-            Password: c.DatabasePassword,
+            Password: dbPassword,
             DB: c.DatabaseName,
 
             DialTimeout: time.Second * 3,
