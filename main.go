@@ -4,6 +4,7 @@ import (
     "context"
     "fmt"
     "log"
+    "log/slog"
     "os"
     "os/signal"
     "syscall"
@@ -20,8 +21,21 @@ import (
 func main() {
     config, err := configuration.New()
     if err != nil {
-        log.Fatalf( "HTTP server failed to start: %v", err )
+        slog.Error( fmt.Sprintf( "HTTP server failed to start: %v", err ) )
+        os.Exit( 1 )
     }
+
+    level, _ := config.GetLogLevel()
+    slog.SetDefault(
+        slog.New(
+            slog.NewTextHandler(
+                os.Stdout,
+                &slog.HandlerOptions{
+                    Level: level,
+                },
+            ),
+        ),
+    )
 
     server := fiber.New( fiber.Config{
         AppName: "webservice",
@@ -40,13 +54,15 @@ func main() {
 
     err = routing.SetRoutes( server, config, store, &isHealthy )
     if err != nil {
-        log.Fatalf( "HTTP server failed to start: %v", err )
+        slog.Error( fmt.Sprintf( "HTTP server failed to start: %v", err ) )
+        os.Exit( 1 )
     }
 
     go func(){
         err := server.Listen( fmt.Sprintf( "%s:%d", config.Host, config.Port ) )
         if err != nil {
-            log.Fatalf( "HTTP server failed to start: %v", err )
+            slog.Error( fmt.Sprintf( "HTTP server failed to start: %v", err ) )
+            os.Exit( 1 )
         }
     }()
 

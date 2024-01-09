@@ -4,6 +4,7 @@ import (
     "errors"
     "fmt"
     "os"
+    "log/slog"
     "unicode"
     fp "path/filepath"
 
@@ -58,14 +59,8 @@ func New() ( *Config, error ){
 
     if cfg.Environment == "development" { cfg.LogLevel = "debug" }
 
-    possibleLogLevels := map[ string ] bool {
-        "error":    true,
-        "debug":    true,
-    }
-    if _, ok := possibleLogLevels[ cfg.LogLevel ]; !ok {
-        return nil, errors.New(
-            fmt.Sprintf( "Invalid log level: %s", cfg.LogLevel ),
-        )
+    if _, err := cfg.GetLogLevel(); err != nil {
+        return nil, err
     }
 
     if len( cfg.DatabaseHost ) >= 1 && len( cfg.DatabasePassword ) >= 2 {
@@ -105,4 +100,20 @@ func New() ( *Config, error ){
 
 
     return &cfg, nil
+}
+
+
+func ( cfg *Config ) GetLogLevel() ( slog.Level, error ){
+    possibleLogLevels := map[ string ] slog.Level {
+        "error":    slog.LevelError,
+        "debug":    slog.LevelDebug,
+    }
+    level, ok := possibleLogLevels[ cfg.LogLevel ]
+    if !ok {
+        return slog.LevelError, errors.New(
+            fmt.Sprintf( "Invalid log level: %s", cfg.LogLevel ),
+        )
+    }else{
+        return level, nil
+    }
 }

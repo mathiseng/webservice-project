@@ -7,7 +7,7 @@ import (
     "strings"
     "net/http"
     "html/template"
-    "log"
+    log "log/slog"
     "bytes"
     "mime"
 
@@ -32,11 +32,13 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
 
     if config.LogLevel == "debug" {
         router.All( "*", func( c *f.Ctx ) error {
-            log.Printf( "%s %s  mime:%s  agent:%s",
-                c.Method(),
-                c.Path(),
-                c.Get( f.HeaderContentType, c.Get( f.HeaderAccept, "" ) ),
-                c.Get( f.HeaderUserAgent ),
+            log.Debug(
+                fmt.Sprintf( "%s %s  mime:%s  agent:%s",
+                    c.Method(),
+                    c.Path(),
+                    c.Get( f.HeaderContentType, c.Get( f.HeaderAccept, "" ) ),
+                    c.Get( f.HeaderUserAgent ),
+                ),
             )
             return c.Next()
         })
@@ -106,6 +108,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         } else {
             names, err := store.List()
             if err != nil {
+                log.Debug( err.Error() )
                 return c.SendStatus( http.StatusInternalServerError )
             }
 
@@ -135,6 +138,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         for _, envVar := range os.Environ() {
             _, err := c.WriteString( fmt.Sprintln( envVar ) )
             if err != nil {
+                log.Debug( err.Error() )
                 c.Status( http.StatusInternalServerError )
                 return err
             }
@@ -152,6 +156,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         name := strings.Clone( c.Params( "name" ) )
         existingItem, err := store.Fetch( name )
         if err != nil {
+            log.Debug( err.Error() )
             return c.SendStatus( http.StatusInternalServerError )
         }
 
@@ -167,6 +172,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
     statePathGroup.Get( "/:name", func( c *f.Ctx ) error {
         existingItem, err := store.Fetch( c.Params( "name" ) )
         if err != nil {
+            log.Debug( err.Error() )
             c.Status( http.StatusInternalServerError )
             return c.Send( nil )
         }
@@ -193,6 +199,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         name := strings.Clone( c.Params( "name" ) )
         existingItem, err := store.Fetch( name )
         if err != nil {
+            log.Debug( err.Error() )
             c.Status( http.StatusInternalServerError )
             return c.Send( nil )
         }
@@ -216,6 +223,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         )
 
         if err = store.Add( newItem ); err != nil {
+            log.Debug( err.Error() )
             c.Status( http.StatusInternalServerError )
             return c.Send( nil )
         }
@@ -229,6 +237,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         name := strings.Clone( c.Params( "name" ) )
         existingItem, err := store.Fetch( name )
         if err != nil {
+            log.Debug( err.Error() )
             return c.SendStatus( http.StatusInternalServerError )
         }
 
@@ -237,6 +246,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         }
 
         if err = store.Remove( name ); err != nil {
+            log.Debug( err.Error() )
             return c.SendStatus( http.StatusInternalServerError )
         }
 
@@ -248,6 +258,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
         name := strings.Clone( c.Params( "name" ) )
         existingItem, err := store.Fetch( name )
         if err != nil {
+            log.Debug( err.Error() )
             return c.SendStatus( http.StatusInternalServerError )
         }
 
@@ -269,6 +280,7 @@ func SetRoutes( router *f.App, config *configuration.Config, store state.Store, 
     router.Get( "/states", func( c *f.Ctx ) error {
         names, err := store.List()
         if err != nil {
+            log.Debug( err.Error() )
             return c.SendStatus( http.StatusInternalServerError )
         }
 
