@@ -112,7 +112,7 @@ List all existing entries (returns JSON or plain text, depending on the `Accept`
 ```bash
 curl \
   -X GET \
-  --header 'Accept: text/plain'\
+  --header 'Accept: text/plain' \
   http://localhost:8080/states
 ```
 

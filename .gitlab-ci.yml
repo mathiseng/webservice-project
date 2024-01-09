@@ -1,0 +1,11 @@
+workflow:
+  rules:
+    - if: >-
+        $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"
+      when: 'always'
+    - when: 'never'
+
+
+job_trigger-pipeline:
+  trigger:
+    project: 'fb6-wp11-devops/webservice-build-and-publish'
