@@ -7,7 +7,8 @@ or even used the project work.
 
 #### Prerequisites:
 
-* Go toolchain (install via system package manager or [by hand](https://go.dev/doc/install))
+* minimal [required version](./go.mod#L3) of the Go toolchain (install via
+  system package manager or [by hand](https://go.dev/doc/install))
 * [optional] [Redis](https://redis.io/docs/install/) to persist state
 
 
