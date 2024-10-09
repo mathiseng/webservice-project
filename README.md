@@ -1,8 +1,8 @@
 Webservice
 ==========
 
-A Go-based simple web service meant to be the subject of any tutorial
-or even used the project work.
+A Go-based simple web service meant to be the subject of any exercise
+or even used in the project work.
 
 
 #### Prerequisites:
