@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d138a7fa-73e4-4a99-b3e4-1072fd03b8c3" name="Changes" comment="Update ci-pipeline.yml" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="mathiseng &lt;156097230+mathiseng@users.noreply.github.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Concept" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2no9wmDSM1HA4jqdeIy2Qi2CPQD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/men/Documents/Uni/DEV-OPS/webservice-project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Exercise_1_Define_and_run_a_pipeline" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d138a7fa-73e4-4a99-b3e4-1072fd03b8c3" name="Changes" comment="Update ci-pipeline.yml" />
+      <created>1729628802975</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729628802975</updated>
+      <workItem from="1729628803996" duration="4546000" />
+      <workItem from="1729861802113" duration="15953000" />
+      <workItem from="1730566670659" duration="1772000" />
+    </task>
+    <task id="LOCAL-00001" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729628819720</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729628819720</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729629006801</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729629006801</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729629048552</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729629048552</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729629106528</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1729629106528</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729629218048</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729629218048</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729629292615</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1729629292615</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729630479928</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1729630479928</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729631055670</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1729631055670</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729861816255</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1729861816255</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729861932519</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1729861932519</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729862919472</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1729862919472</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729880089732</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1729880089732</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729880241778</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1729880241778</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729880375687</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1729880375687</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729882005316</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1729882005316</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729882288147</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1729882288147</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729882572909</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1729882572909</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1729882818433</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1729882818433</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1730562307770</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1730562307770</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Test">
+      <option name="closed" value="true" />
+      <created>1730564794937</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1730564794937</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Test">
+      <option name="closed" value="true" />
+      <created>1730565135693</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1730565135694</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Test">
+      <option name="closed" value="true" />
+      <created>1730565185472</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1730565185472</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Test">
+      <option name="closed" value="true" />
+      <created>1730565475681</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1730565475681</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Update ci-pipeline.yml">
+      <option name="closed" value="true" />
+      <created>1730565639147</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1730565639147</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Test" />
+    <MESSAGE value="Update ci-pipeline.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update ci-pipeline.yml" />
+  </component>
+</project>
