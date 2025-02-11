@@ -1,0 +1,27 @@
+name: Build-and-Push-Container-Image
+
+on:
+  push:
+    branches: ["release"]
+
+env:
+  GITHUB_REGISTRY: ghcr.io
+
+jobs:
+  build-and-push-container-image:
+    runs-on: ubuntu-latest
+    #Orientation for the following code where found here: https://docs.github.com/de/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      # This youtube video also helped to get an greater idea of how it is working with podman
+      # Src: https://www.youtube.com/watch?v=4ui3mLuNhSc&t=404s&ab_channel=TechWithFoyzur
+      - name: build and push podman image
+        run: |
+          podman login -u ${{github.repository_owner}} --password ${{secrets.GITHUB_TOKEN}} ${{env.GITHUB_REGISTRY}}
+          podman build -t ${{env.GITHUB_REGISTRY}}/${{github.repository_owner}}/podman-webservice:test -f Containerfile .
+          podman push ${{env.GITHUB_REGISTRY}}/${{github.repository_owner}}/podman-webservice:test

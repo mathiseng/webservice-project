@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d138a7fa-73e4-4a99-b3e4-1072fd03b8c3" name="Changes" comment="Update ci-pipeline.yml" />
+    <list default="true" id="d138a7fa-73e4-4a99-b3e4-1072fd03b8c3" name="Changes" comment="Update ci-pipeline.yml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +36,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/men/Documents/Uni/DEV-OPS/webservice-project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -51,7 +54,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23726.96" />
       </set>
     </attachedChunks>
   </component>
@@ -65,7 +68,8 @@
       <updated>1729628802975</updated>
       <workItem from="1729628803996" duration="4546000" />
       <workItem from="1729861802113" duration="15953000" />
-      <workItem from="1730566670659" duration="1772000" />
+      <workItem from="1730566670659" duration="2935000" />
+      <workItem from="1731515115108" duration="2512000" />
     </task>
     <task id="LOCAL-00001" summary="Update ci-pipeline.yml">
       <option name="closed" value="true" />
