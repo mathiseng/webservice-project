@@ -1,0 +1,16 @@
+name: Setup
+description: "Sets up Go environment and installs dependencies"
+
+#Ich wollte das Setup und das Dependency installieren nicht ständig manuell neu machen , habe mich hier zum anlegen der action.yml informiert
+# Quelle: https://victoronsoftware.com/posts/github-reusable-workflows-and-steps/#reusable-steps-composite-action
+runs:
+  using: "composite"
+  steps:
+    # Quelle für installieren von Go-Dependency https://docs.github.com/de/actions/use-cases-and-examples/building-and-testing/building-and-testing-go#using-a-specific-go-version
+    - name: Setup Go 1.21.x
+      uses: actions/setup-go@v5
+      with:
+        go-version: "1.21.x"
+    - name: Install dependencies
+      run: go get -t ./...
+      shell: bash
