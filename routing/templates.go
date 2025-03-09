@@ -11,6 +11,7 @@ const indexHtml = `
         </head>
         <body>
             <h1 style="color: {{ .Color }}">Hello World, again!</h1>
+            <p> Review DevOps new version </p>
             <p>Version: {{ .Version }}</p>
         </body>
     </html>
